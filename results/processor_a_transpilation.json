@@ -1,0 +1,7 @@
+{
+    "processor": "Processor A (5-qubit)",
+    "depth": 23,
+    "cx_count": 12,
+    "swap_count": 0,
+    "total_gates": 49
+}
