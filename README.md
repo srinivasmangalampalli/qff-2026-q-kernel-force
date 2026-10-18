@@ -1,17 +1,53 @@
-# Qiskit Fall Fest 2026 - PS-Q2: High-Dimensional Quantum Kernel Classifier
-**Team:** Q-Kernel Force  
-**Track:** Quantum Machine Learning  
+# QFF 2026 — Quantum Kernel Force
 
-## Executive Summary
-This repository implements **PS-Q2 (High-Dimensional Quantum Kernel Classifier)** using Qiskit's `ZZFeatureMap` to project feature vectors into high-dimensional Hilbert space. We compute quantum state overlap kernel matrices via `FidelityQuantumKernel` to train a Support Vector Classifier (`QSVC`), achieving **98.89% accuracy**. We compare this against classical RBF and Linear SVM baselines and profile hardware compilation overheads across Processor A (5-qubit) and Processor B (9-qubit) coupling maps.
+## Project Overview
+Comparison of quantum kernel support vector machines (QSVM)
+with classical RBF and polynomial SVMs using Qiskit.
 
-## Repository Structure
-```text
-qff-2026-q-kernel-force/
-├── README.md                          # Execution summary & benchmarks
-├── requirements.txt                   # Dependency environment
-├── notebooks/
-│   └── PS_Q2_Quantum_Kernel.ipynb     # Main pipeline notebook
-└── results/
-    ├── processor_a_transpilation.json  # Transpilation metrics for Processor A
-    └── processor_b_transpilation.json  # Transpilation metrics for Processor B
+## Methods
+- Datasets: sklearn Digits (0 vs 1) and make_moons
+- Quantum feature maps: ZZFeatureMap
+- Quantum kernels: fidelity-based, ideal simulation
+- Classical baselines: RBF and polynomial SVM
+- Model selection: cross-validation
+- Repeated experiments: five make_moons seeds
+- Processor comparison: Qiskit transpilation for A and B
+
+## Main Results
+Five-seed tuned make_moons mean test accuracy:
+
+| Model | Mean Accuracy |
+|---|---:|
+| Classical RBF SVM | 100.0% |
+| Quantum Kernel SVM | 90.4% |
+| Classical Polynomial SVM | 87.2% |
+
+No quantum advantage was observed.
+
+## Processor Benchmark
+A representative two-qubit fidelity circuit was transpiled
+for both supplied processor configurations.
+
+| Processor | Depth | CX Gates | SWAP Gates |
+|---|---:|---:|---:|
+| A | 27 | 6 | 0 |
+| B | 27 | 6 | 0 |
+
+These are compilation metrics, not measured hardware performance.
+
+## Limitations
+- Quantum experiments use ideal simulation.
+- Noise pilot uses illustrative noise, not calibrated processor noise.
+- Five-seed tuned comparison is limited to make_moons.
+- The quantum feature-map design was not independently tuned.
+- No physical quantum processor was used.
+
+## Project Files
+- `notebooks/main_verified.ipynb`: verified notebook
+- `processors/`: processor configurations
+- `results/`: experiment tables and plots
+- `requirements.txt`: Python dependencies
+
+## Reproduction
+Install dependencies from `requirements.txt`, launch Jupyter,
+and run `notebooks/main_verified.ipynb` from the first cell.
