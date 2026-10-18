@@ -1,0 +1,3 @@
+processor,qubits,depth,cx_gates,swap_gates,total_operations
+A,5,27,6,0,45
+B,9,27,6,0,45

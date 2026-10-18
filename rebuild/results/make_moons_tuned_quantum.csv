@@ -1,0 +1,2 @@
+dataset,seed,model,best_C,cv_accuracy,test_accuracy,qubits
+make_moons,42,Tuned Quantum SVM,10,0.9199999999999999,1.0,2

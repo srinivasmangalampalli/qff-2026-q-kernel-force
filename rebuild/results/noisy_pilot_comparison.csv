@@ -1,0 +1,3 @@
+model,train_samples,test_samples,shots,accuracy,noise_type
+Ideal quantum kernel,20,10,,1.0,None
+Noisy quantum kernel,20,10,1024.0,1.0,Illustrative depolarizing + readout

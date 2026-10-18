@@ -1,0 +1,16 @@
+seed,model,accuracy
+10,RBF SVM,0.8
+10,Polynomial SVM,0.8
+20,RBF SVM,1.0
+20,Polynomial SVM,0.84
+30,RBF SVM,0.92
+30,Polynomial SVM,0.72
+40,RBF SVM,1.0
+40,Polynomial SVM,0.88
+50,RBF SVM,0.88
+50,Polynomial SVM,0.8
+10,Quantum SVM,0.84
+20,Quantum SVM,0.88
+30,Quantum SVM,0.84
+40,Quantum SVM,0.92
+50,Quantum SVM,0.84

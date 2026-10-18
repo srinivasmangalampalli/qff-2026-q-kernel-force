@@ -1,0 +1,6 @@
+seed,model,accuracy,cv_accuracy,best_C
+10,Tuned Quantum SVM,0.92,0.9200000000000002,100
+20,Tuned Quantum SVM,0.88,0.96,10
+30,Tuned Quantum SVM,0.92,0.9333333333333333,10
+40,Tuned Quantum SVM,0.96,0.8933333333333333,10
+50,Tuned Quantum SVM,0.84,0.9333333333333333,1

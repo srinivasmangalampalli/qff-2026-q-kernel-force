@@ -1,0 +1,4 @@
+model,accuracy,balanced_accuracy,dataset,seed
+Classical RBF SVM,1.0,1.0,Digits 0 vs 1,42
+Classical polynomial SVM,0.9555555555555556,0.9555555555555555,Digits 0 vs 1,42
+Ideal quantum-kernel SVM,0.9444444444444444,0.9444444444444444,Digits 0 vs 1,42

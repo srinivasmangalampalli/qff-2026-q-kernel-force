@@ -1,0 +1,4 @@
+model,accuracy,balanced_accuracy,dataset,seed
+Classical RBF SVM,0.96,0.9583333333333333,make_moons,42
+Classical polynomial SVM,0.76,0.766025641025641,make_moons,42
+Ideal quantum-kernel SVM,0.96,0.9615384615384616,make_moons,42

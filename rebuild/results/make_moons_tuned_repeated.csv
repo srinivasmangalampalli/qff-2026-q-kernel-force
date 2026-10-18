@@ -1,0 +1,11 @@
+seed,model,accuracy,cv_accuracy,best_params
+10,Tuned RBF SVM,1.0,1.0,"{'svm__C': 1, 'svm__gamma': 10}"
+10,Tuned Polynomial SVM,0.8,0.9199999999999999,"{'svm__C': 0.1, 'svm__degree': 2, 'svm__gamma': 'scale'}"
+20,Tuned RBF SVM,1.0,0.9866666666666667,"{'svm__C': 1, 'svm__gamma': 10}"
+20,Tuned Polynomial SVM,0.96,0.9199999999999999,"{'svm__C': 100, 'svm__degree': 4, 'svm__gamma': 'scale'}"
+30,Tuned RBF SVM,1.0,0.9733333333333334,"{'svm__C': 10, 'svm__gamma': 10}"
+30,Tuned Polynomial SVM,0.8,0.8533333333333333,"{'svm__C': 1, 'svm__degree': 2, 'svm__gamma': 1}"
+40,Tuned RBF SVM,1.0,1.0,"{'svm__C': 1, 'svm__gamma': 10}"
+40,Tuned Polynomial SVM,0.96,0.8800000000000001,"{'svm__C': 100, 'svm__degree': 4, 'svm__gamma': 'scale'}"
+50,Tuned RBF SVM,1.0,0.9866666666666667,"{'svm__C': 1, 'svm__gamma': 10}"
+50,Tuned Polynomial SVM,0.84,0.96,"{'svm__C': 10, 'svm__degree': 3, 'svm__gamma': 'scale'}"
