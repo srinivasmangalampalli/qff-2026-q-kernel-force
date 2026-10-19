@@ -64,8 +64,54 @@ These results use ideal simulation, not physical hardware.
 The Bell-state experiment can be reproduced using
 `generate_bell_evidence.py`.
 
+## Extended Processor Architecture Benchmark
+
+We compared four-qubit ZZ feature-map compilation on both processor
+coupling graphs across five transpiler seeds.
+
+| Entanglement | Metric | Processor A | Processor B |
+|---|---|---:|---:|
+| Linear | Mean depth | 23.00 | 23.00 |
+| Linear | Mean CX gates | 12.00 | 12.00 |
+| Full | Mean depth | 61.00 | 44.80 |
+| Full | Mean CX gates | 33.00 | 30.00 |
+
+For full entanglement, Processor B achieved **26.6% lower mean depth**
+and **9.1% fewer CX gates**. Linear entanglement showed no difference.
+
+![Processor depth comparison](results/figures/qml_processor_depth.png)
+
+![Processor CX comparison](results/figures/qml_processor_cx.png)
+
+Reproduce with `benchmark_qml_processors.py` and
+`plot_qml_processors.py`. Raw data:
+`results/qml_processor_architecture.csv`.
+
+## Noisy Quantum-Kernel Classification Pilot
+
+A separate four-qubit, full-entanglement Digits 0-vs-1 pilot
+used 12 training samples, 6 test samples, and 256 shots per circuit.
+
+| Metric | Processor A | Processor B |
+|---|---:|---:|
+| Ideal test accuracy | 83.33% | 83.33% |
+| Noisy test accuracy | 66.67% | 66.67% |
+| Mean fidelity-circuit depth | 110.75 | 88.25 |
+| Mean CX gates | 63.17 | 55.17 |
+
+Processor B compiled the tested fidelity circuits with **20.3% lower
+mean depth** and **12.7% fewer CX gates**, but both processors
+achieved identical classification accuracy.
+
+This is a small, finite-shot pilot with illustrative noise,
+not a calibrated hardware comparison or statistical advantage claim.
+
+- Script: `benchmark_noisy_qml.py`
+- Results: `results/noisy_qml_processor_pilot.csv`
+- Detailed methodology and limitations: [Technical Report](report.md)
+
 ## Limitations
-- Quantum experiments use ideal simulation.
+- Main quantum classification results use ideal simulation; a separate pilot uses illustrative simulated noise.
 - Noise pilot uses illustrative noise, not calibrated processor noise.
 - Five-seed tuned comparison is limited to make_moons.
 - The quantum feature-map design was not independently tuned.
