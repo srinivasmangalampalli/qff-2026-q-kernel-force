@@ -130,3 +130,20 @@ The following figure compares ideal and noisy test accuracy for both processors.
 ## Reproduction
 Install dependencies from `requirements.txt`, launch Jupyter,
 and run `notebooks/main.ipynb` from the first cell.
+
+## Multi-Seed Quantum-Kernel Noise Evaluation
+
+We extended the processor noise pilot to three stratified dataset splits (seeds 11, 21, and 42), using 24 training and 12 test samples per split, with 256 measurement shots.
+
+| Processor | Ideal accuracy (mean ± SD) | Noisy accuracy (mean ± SD) |
+|---|---:|---:|
+| A | 63.89% ± 19.24% | 69.44% ± 9.62% |
+| B | 61.11% ± 17.35% | 66.67% ± 14.43% |
+
+![Multi-seed mean accuracy](results/figures/noisy_qml_multiseed_mean.png)
+
+![Accuracy across dataset splits](results/figures/noisy_qml_multiseed_by_seed.png)
+
+**Interpretation:** Accuracy varied considerably across dataset splits. The higher noisy-simulation means do not establish that noise improves classification. All results are simulated, the noise parameters are illustrative, and the small evaluation does not establish quantum advantage.
+
+**Reproduce:** Run `benchmark_noisy_qml_multiseed.py` and then `plot_noisy_qml_multiseed.py`. Raw results are in `results/noisy_qml_multiseed.csv`. See [Section 14 of the technical report](report.md#14-multi-seed-noisy-quantum-kernel-evaluation) for methodology and limitations.

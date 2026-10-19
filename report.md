@@ -245,3 +245,50 @@ The following figure compares ideal and noisy test accuracy for both processors.
 - Experiment script: `benchmark_noisy_qml.py`
 - Raw results: `results/noisy_qml_processor_pilot.csv`
 - Processor configurations: `processors/processor_A.json` and `processors/processor_B.json`
+
+## 14. Multi-Seed Noisy Quantum-Kernel Evaluation
+
+### 14.1 Objective
+
+To extend the single-split noise pilot, we evaluated the quantum-kernel classifier across three stratified dataset splits (seeds 11, 21, and 42) on two simulated processor coupling maps under ideal and illustrative noisy conditions.
+
+The experiment uses handwritten digits 0 and 1, with 24 training samples and 12 test samples per split. PCA reduces the input to four features, which are encoded using a ZZ feature map. Quantum-kernel entries are estimated using 256 measurement shots. Classification uses an SVM with a precomputed quantum kernel.
+
+The noisy simulation uses illustrative depolarizing and readout errors. These parameters are not calibrated to actual quantum hardware.
+
+### 14.2 Classification Results
+
+| Processor | Ideal mean accuracy | Noisy mean accuracy |
+|---|---:|---:|
+| A | 63.89% ± 19.24% | 69.44% ± 9.62% |
+| B | 61.11% ± 17.35% | 66.67% ± 14.43% |
+
+Values are the mean and sample standard deviation across three dataset splits. Each split contains only 12 test examples, so accuracy changes occur in increments of approximately 8.33 percentage points.
+
+![Multi-seed mean accuracy and standard deviation](results/figures/noisy_qml_multiseed_mean.png)
+
+![Multi-seed accuracy by dataset split](results/figures/noisy_qml_multiseed_by_seed.png)
+
+### 14.3 Interpretation
+
+Both processor configurations showed considerable variation between dataset splits. Processor A achieved slightly higher mean accuracy than Processor B in both simulation conditions, but the small sample size does not support a statistically reliable processor ranking.
+
+The noisy simulations produced higher mean accuracy than the ideal simulations in these particular runs. This observation must not be interpreted as evidence that quantum noise improves classification. Finite-shot estimation, dataset variation, and the limited number of splits can affect these results.
+
+Processor B generally required fewer transpiled circuit layers and CX gates than Processor A in this benchmark. This indicates a circuit-mapping difference, not necessarily better classification performance or lower physical-device error.
+
+### 14.4 Limitations and Reproducibility
+
+- Only three dataset splits were evaluated, with 12 test samples each.
+- The results come from simulation, not execution on physical quantum processors.
+- The noise model is illustrative rather than hardware-calibrated.
+- Accuracy variability is reported as sample standard deviation, not a confidence interval.
+- No quantum advantage over classical machine-learning methods is claimed.
+
+Reproduction scripts and raw results:
+
+- `benchmark_noisy_qml_multiseed.py`
+- `plot_noisy_qml_multiseed.py`
+- `results/noisy_qml_multiseed.csv`
+
+These results complement the earlier classical baselines, processor-topology benchmark, and single-split noise pilot.
