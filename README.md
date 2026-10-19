@@ -110,6 +110,10 @@ not a calibrated hardware comparison or statistical advantage claim.
 - Results: `results/noisy_qml_processor_pilot.csv`
 - Detailed methodology and limitations: [Technical Report](report.md)
 
+The following figure compares ideal and noisy test accuracy for both processors. Results are from one small simulated pilot.
+
+![Ideal vs noisy QML accuracy](results/figures/noisy_qml_accuracy.png)
+
 ## Limitations
 - Main quantum classification results use ideal simulation; a separate pilot uses illustrative simulated noise.
 - Noise pilot uses illustrative noise, not calibrated processor noise.
