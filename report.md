@@ -56,7 +56,7 @@ A representative two-qubit **full fidelity circuit** was transpiled on both proc
 | CX count | 6 | 6 |
 | SWAP count | 0 | 0 |
 
-These are **compilation metrics**, not physical processor measurements. This small circuit fits both architectures without routing overhead, so the present experiment does **not** demonstrate an A/B performance difference. A meaningful extension would compare a larger interaction pattern over multiple transpiler seeds, while controlling layout, gate basis and noise assumptions.
+These are **compilation metrics**, not physical processor measurements. The original two-qubit circuit produced identical depth and CX counts on both processors, so this particular benchmark did not reveal an architectural difference. However, the extended four-qubit benchmark in Section 12 showed that Processor B achieved 26.6% lower mean circuit depth and 9.1% fewer CX gates for full entanglement across five transpiler seeds. Both processors remained identical for linear entanglement. These findings concern circuit compilation only; they do not establish improved noisy classification accuracy.
 
 ## 8. Noise pilot and limitations
 An illustrative Aer noise pilot on 20 training and 10 testing digits examples used one-qubit depolarizing error 0.001, two-qubit depolarizing error 0.005, readout error 0.01 and 1024 shots. Both ideal and noisy versions classified all 10 test examples correctly; average kernel deviation was approximately 0.012549. The pilot is too small to claim noise robustness and is **not** a calibrated Processor A/B noise comparison. No physical processor was used.
@@ -96,11 +96,20 @@ The corresponding circuit diagrams and measurement counts are saved in `assets/b
 These are ideal simulator results, not physical quantum hardware measurements. They do not establish a noise or fidelity advantage for either processor.
 
 ## 10. Reproducibility and evidence locations
-- Notebook: `notebooks/main.ipynb`
+
+- Main classification notebook: `notebooks/main.ipynb`
 - Processor definitions: `processors/processor_A.json`, `processors/processor_B.json`
-- Classification and transpilation tables: `results/`
+- Classification results and existing benchmarks: `results/`
 - Processor topology diagrams: `assets/processor_A_topology.png`, `assets/processor_B_topology.png`
-- Bell validation script: `generate_bell_evidence.py` (requires execution)
+- Bell-state validation script: `generate_bell_evidence.py`
+- Bell-state histograms and measurement counts: `assets/bell_state/`
+- Extended architecture benchmark: `benchmark_qml_processors.py`
+- Architecture benchmark measurements: `results/qml_processor_architecture.csv`
+- Figure-generation script: `plot_qml_processors.py`
+- Circuit-depth figure: `results/figures/qml_processor_depth.png`
+- CX-gate figure: `results/figures/qml_processor_cx.png`
+
+All processor architecture measurements are simulation-based compilation results, not physical quantum-hardware measurements.
 
 ## 11. Next steps and integrity statement
 
