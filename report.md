@@ -103,4 +103,76 @@ These are ideal simulator results, not physical quantum hardware measurements. T
 - Bell validation script: `generate_bell_evidence.py` (requires execution)
 
 ## 11. Next steps and integrity statement
-Priorities are (1) execute and archive Bell-state evidence, (2) repeat larger, topology-sensitive quantum-kernel compilation benchmarks over several seeds, (3) compare ideal versus noisy A/B classification using clearly specified, identical or processor-specific noise assumptions, and (4) confirm all official PS-Q2 rubric requirements. The present results must not be presented as measured quantum-hardware performance or quantum advantage. This report was prepared with AI assistance and requires author verification before submission.
+
+Completed work includes Bell-state validation using ideal Qiskit Aer simulation and an extended four-qubit ZZ feature-map architecture benchmark across five transpiler seeds. The benchmark results and figures are documented in Section 12.
+
+Remaining priorities are (1) compare ideal versus noisy A/B quantum-kernel classification using clearly specified noise assumptions, (2) investigate routing and placement effects, and (3) verify compliance with the official PS-Q2 evaluation requirements.
+
+The results must not be presented as physical quantum-hardware measurements or proof of quantum advantage. This report was prepared with AI assistance and requires author verification before submission.
+
+## 12. Extended QML Processor Architecture Benchmark
+
+### 12.1 Objective
+
+This experiment evaluates how processor connectivity affects the compilation of four-qubit ZZ feature-map circuits used in quantum-kernel classification.
+
+Two entanglement configurations were tested:
+- Linear entanglement, matching the main Digits classifier.
+- Full entanglement, as an additional topology-sensitive benchmark.
+
+### 12.2 Experimental Setup
+
+- Logical qubits: 4
+- Feature map: `zz_feature_map`
+- Repetitions: 2
+- Basis gates: RZ, SX, X, CX
+- Optimization level: 1
+- Transpiler seeds: 11, 21, 31, 41, 42
+- Processors: A (5 physical qubits) and B (9 physical qubits)
+
+Each processor-entanglement combination was transpiled five times.
+
+### 12.3 Results
+
+Values are mean +/- sample standard deviation across five transpiler seeds.
+
+| Entanglement | Metric | Processor A | Processor B |
+|---|---|---:|---:|
+| Linear | Circuit depth | 23.00 +/- 0.00 | 23.00 +/- 0.00 |
+| Linear | CX gates | 12.00 +/- 0.00 | 12.00 +/- 0.00 |
+| Full | Circuit depth | 61.00 +/- 0.00 | 44.80 +/- 1.79 |
+| Full | CX gates | 33.00 +/- 0.00 | 30.00 +/- 0.00 |
+
+### 12.4 Circuit Depth Comparison
+
+![Processor A vs B circuit depth](results/figures/qml_processor_depth.png)
+
+### 12.5 Two-Qubit Gate Comparison
+
+![Processor A vs B CX gates](results/figures/qml_processor_cx.png)
+
+### 12.6 Interpretation
+
+For linear entanglement, both processors produce identical circuit depth and CX counts.
+
+For full entanglement, Processor B reduces mean circuit depth by approximately 26.6% and CX count by 9.1% relative to Processor A.
+
+The denser connectivity of Processor B is a plausible explanation for the reduced compilation overhead. However, this experiment alone does not isolate connectivity from all transpiler placement and routing decisions.
+
+The final transpiled circuits contain zero explicit SWAP gates. This does not establish zero routing overhead because routing operations can be decomposed into the target basis gates.
+
+### 12.7 Limitations
+
+- These are transpilation results, not quantum-hardware measurements.
+- Five transpiler seeds measure compiler variability, not hardware uncertainty.
+- Full entanglement is an additional benchmark and does not replace the original linear-entanglement classifier.
+- No noisy classification accuracy advantage has been established.
+
+### 12.8 Reproducibility
+
+- Script: `benchmark_qml_processors.py`
+- Raw measurements: `results/qml_processor_architecture.csv`
+- Plot generator: `plot_qml_processors.py`
+- Figures: `results/figures/`
+
+Run the benchmark using the project's Qiskit environment, then execute the plotting script to regenerate the figures.
