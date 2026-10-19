@@ -185,3 +185,59 @@ The final transpiled circuits contain zero explicit SWAP gates. This does not es
 - Figures: `results/figures/`
 
 Run the benchmark using the project's Qiskit environment, then execute the plotting script to regenerate the figures.
+
+## 13. Noisy Processor A/B Quantum-Kernel Classification Pilot
+
+### 13.1 Objective
+
+This pilot investigates whether differences in compiled quantum-kernel circuit complexity between Processor A and Processor B correspond to differences in classification accuracy under identical illustrative noise assumptions.
+
+### 13.2 Experimental setup
+
+- Dataset: scikit-learn Digits, classes 0 and 1
+- Training samples: 12
+- Testing samples: 6
+- Preprocessing: four-component PCA followed by MinMax scaling to [0, pi/2], fitted only on training data
+- Quantum feature map: four-qubit ZZ feature map, two repetitions, full entanglement
+- Classifier: SVM with a sampled, precomputed fidelity kernel and C=1.0
+- Measurement shots: 256 per fidelity circuit
+- Dataset, transpiler and simulator seed: 42
+- Simulator: Qiskit Aer matrix-product-state simulator
+- Basis gates: rz, sx, x, cx
+- Processor connectivity: supplied Processor A and B coupling graphs
+
+The ideal condition uses finite-shot simulation without an explicit noise model. The noisy condition uses the same circuit compilation settings with illustrative depolarizing errors of 0.001 for one-qubit gates and 0.005 for CX gates, plus a symmetric 1% readout error.
+
+### 13.3 Recorded results
+
+| Metric | Processor A | Processor B |
+|---|---:|---:|
+| Ideal test accuracy | 83.33% | 83.33% |
+| Noisy test accuracy | 66.67% | 66.67% |
+| Mean training-kernel circuit depth | 110.75 | 88.25 |
+| Mean training-kernel CX count | 63.17 | 55.17 |
+
+Processor B produced approximately 20.3% lower mean circuit depth and 12.7% fewer mean CX gates in this pilot.
+
+Both processors correctly classified five of six test samples in the ideal condition and four of six under the illustrative noise model.
+
+### 13.4 Interpretation
+
+Processor B required fewer compiled operations for the tested full-entanglement fidelity circuits. Nevertheless, both processors achieved the same test accuracy in the ideal and noisy conditions.
+
+The pilot therefore demonstrates a compilation-cost difference, not a measured classification-accuracy advantage.
+
+### 13.5 Limitations
+
+- Only six test samples and one dataset split were evaluated.
+- Only one transpiler seed and one simulator seed were used.
+- Finite-shot sampling introduces statistical variation even in the ideal condition.
+- The noise parameters are illustrative and are not calibrated to physical Processor A or Processor B hardware.
+- The experiment does not establish quantum advantage, statistical significance, or physical hardware performance.
+- Full entanglement was selected to probe processor connectivity; the original main Digits classifier uses linear entanglement.
+
+### 13.6 Reproducibility
+
+- Experiment script: `benchmark_noisy_qml.py`
+- Raw results: `results/noisy_qml_processor_pilot.csv`
+- Processor configurations: `processors/processor_A.json` and `processors/processor_B.json`

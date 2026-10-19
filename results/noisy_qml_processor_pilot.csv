@@ -1,0 +1,5 @@
+processor,condition,train_samples,test_samples,shots,accuracy,mean_train_circuit_depth,mean_train_cx_gates
+A,ideal,12,6,256,0.8333,110.75,63.17
+A,noisy,12,6,256,0.6667,110.75,63.17
+B,ideal,12,6,256,0.8333,88.25,55.17
+B,noisy,12,6,256,0.6667,88.25,55.17
