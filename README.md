@@ -35,6 +35,35 @@ for both supplied processor configurations.
 
 These are compilation metrics, not measured hardware performance.
 
+## Technical Report and Experimental Evidence
+
+The [Phase 1 Technical Report](report.md) explains the PS-Q2
+problem statement, methodology, processor architectures,
+performance penalties, experimental findings, and limitations.
+
+### Processor Architecture
+
+| Processor A | Processor B |
+|---|---|
+| ![Processor A](assets/processor_A_topology.png) | ![Processor B](assets/processor_B_topology.png) |
+
+### Bell-State Validation
+
+A two-qubit Bell state was simulated using 4,096 shots
+for each processor configuration.
+
+| Processor A | Processor B |
+|---|---|
+| ![Bell A](assets/bell_state/processor_A_bell_histogram.png) | ![Bell B](assets/bell_state/processor_B_bell_histogram.png) |
+
+Both simulations produced 2,009 counts of `00` and
+2,087 counts of `11`, consistent with the expected Bell-state
+measurement distribution.
+
+These results use ideal simulation, not physical hardware.
+The Bell-state experiment can be reproduced using
+`generate_bell_evidence.py`.
+
 ## Limitations
 - Quantum experiments use ideal simulation.
 - Noise pilot uses illustrative noise, not calibrated processor noise.
@@ -43,11 +72,11 @@ These are compilation metrics, not measured hardware performance.
 - No physical quantum processor was used.
 
 ## Project Files
-- `notebooks/main_verified.ipynb`: verified notebook
+- `notebooks/main.ipynb`: verified notebook
 - `processors/`: processor configurations
 - `results/`: experiment tables and plots
 - `requirements.txt`: Python dependencies
 
 ## Reproduction
 Install dependencies from `requirements.txt`, launch Jupyter,
-and run `notebooks/main_verified.ipynb` from the first cell.
+and run `notebooks/main.ipynb` from the first cell.
